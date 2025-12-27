@@ -1,0 +1,1024 @@
+!pip install db-sqlite3
+
+import sqlite3
+
+# Connect to SQLite database (or create a new one if it doesn't exist)
+conn = sqlite3.connect('your_database_name.db')
+cursor = conn.cursor()
+
+# Execute the SQL statements to create tables
+cursor.executescript('''
+CREATE TABLE IF NOT EXISTS alumno (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT NOT NULL,
+    edad INTEGER NOT NULL,
+    sexo TEXT NOT NULL,
+    entidad TEXT NOT NULL,
+    ocupacion TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS RegistroMarcas (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    MarcaTemporal TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Consentimientos (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ConsentimientoTexto TEXT
+);
+
+CREATE TABLE IF NOT EXISTS IntervaloEdad (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    RangoEdad TEXT
+);
+
+CREATE TABLE IF NOT EXISTS SexoNacimiento (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Sexo TEXT
+);
+
+CREATE TABLE IF NOT EXISTS AreaLaboral (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Area TEXT
+);
+
+CREATE TABLE IF NOT EXISTS EntidadNacimiento (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Entidad TEXT
+);
+
+CREATE TABLE IF NOT EXISTS AsignaturasCursadas (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Asignatura TEXT
+);
+
+CREATE TABLE IF NOT EXISTS ModalidadEnsenanza (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Modalidad TEXT
+);
+
+CREATE TABLE IF NOT EXISTS UsoGrabaciones (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UsoConsulta TEXT
+);
+
+CREATE TABLE IF NOT EXISTS PlataformasTrabajo (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Plataforma TEXT
+);
+
+CREATE TABLE IF NOT EXISTS EficaciaAlumno (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    NivelEficacia INTEGER,
+    ComunicacionProfesores INTEGER,
+    AumentoInteresContenido INTEGER,
+    MejoraMemoria INTEGER,
+    MejoraAtencion INTEGER,
+    PersonalizacionAprendizaje INTEGER,
+    InversionCapacitacion INTEGER,
+    MejoraRetroalimentacion INTEGER,
+    SimplificacionTareasAdmin INTEGER,
+    FlexibilidadPlaneacion INTEGER,
+    MejoraParticipacionAlumnos INTEGER,
+    MejoraAutoevaluacion INTEGER,
+    NivelEsfuerzo INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS EficaciaProfesor (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    NivelEficacia INTEGER,
+    NivelEsfuerzo INTEGER,
+    ConocimientosIniciales TEXT,
+    ConocimientosNecesarios TEXT,
+    ContribucionCurso TEXT,
+    UsadoGoogleColab TEXT
+);
+
+CREATE TABLE IF NOT EXISTS ConocimientosTecnologicos (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    NivelEficacia INTEGER,
+    UsoGoogleColab TEXT,
+    FacilidadUsoPythonColab TEXT,
+    UsoGoogleDrive TEXT,
+    PreferenciaClasesColab TEXT,
+    BeneficioGrabacionesClase TEXT,
+    InteractividadClases TEXT,
+    FormatoClasesEnLinea TEXT,
+    DistraccionesDuranteClase TEXT,
+    ConcentracionDuranteClase TEXT,
+    OtrasMateriasHoraClase TEXT,
+    FacilidadAprendizajePython TEXT,
+    DificultadTemas TEXT,
+    ComprensionPOO TEXT,
+    UsoIA TEXT,
+    TecnicasAprendizaje TEXT,
+    AyudaIAAprendizaje TEXT,
+    UsoSQLiteColab TEXT
+);
+
+INSERT INTO RegistroMarcas (MarcaTemporal) VALUES
+('2023-11-01 16:02:35'),
+('2023-11-01 16:05:38'),
+('2023-11-01 16:09:13'),
+('2023-11-01 17:03:51'),
+('2023-11-01 18:02:26'),
+('2023-11-01 18:11:45'),
+('2023-11-01 19:01:28'),
+('2023-11-01 21:10:34'),
+('2023-11-01 21:40:26'),
+('2023-11-01 22:51:48'),
+('2023-11-01 23:18:56'),
+('2023-11-02 07:47:45'),
+('2023-11-02 11:43:38'),
+('2023-11-02 12:17:44'),
+('2023-11-02 14:03:04'),
+('2023-11-02 15:00:31'),
+('2023-11-02 15:05:35'),
+('2023-11-02 15:11:15'),
+('2023-11-02 15:11:52'),
+('2023-11-02 15:21:34'),
+('2023-11-02 18:28:49'),
+('2023-11-02 20:23:17'),
+('2023-11-02 21:04:34'),
+('2023-11-02 21:07:13'),
+('2023-11-02 21:22:59'),
+('2023-11-02 21:42:30'),
+('2023-11-02 22:12:13'),
+('2023-11-03 01:40:55'),
+('2023-11-03 11:18:17'),
+('2023-11-03 12:39:47'),
+('2023-11-03 17:40:39'),
+('2023-11-03 18:47:06'),
+('2023-11-03 21:14:39'),
+('2023-11-04 09:45:26'),
+('2023-11-04 09:47:02'),
+('2023-11-04 09:47:03'),
+('2023-11-04 09:47:39'),
+('2023-11-04 09:50:14'),
+('2023-11-04 09:58:13'),
+('2023-11-04 10:43:11'),
+('2023-11-04 10:46:50'),
+('2023-11-04 13:30:18'),
+('2023-11-04 15:20:39'),
+('2023-11-07 11:40:23'),
+('2023-11-07 11:52:11'),
+('2023-11-07 11:53:53');
+
+INSERT INTO Consentimientos (ConsentimientoTexto) VALUES
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario'),
+('Soy mayor de edad y deseo contestar el cuestionario');
+
+INSERT INTO IntervaloEdad (RangoEdad) VALUES
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 41 a 50 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 18 a 20 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 18 a 20 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años'),
+('De 21 a 30 años');
+
+INSERT INTO SexoNacimiento (Sexo) VALUES
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Mujer'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Mujer'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Mujer'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Mujer'),
+('Mujer'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Mujer'),
+('Mujer'),
+('Mujer'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre'),
+('Hombre'),
+('Hombre'),
+('Mujer'),
+('Hombre'),
+('Hombre');
+
+INSERT INTO AreaLaboral (Area) VALUES
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante, Trabajador'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante, Comercio informal'),
+('Empleado en el sector público, Estudiante, Docencia'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante, Comercio informal'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Docencia'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Empleado en el sector público'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Estudiante'),
+('Empleado en el sector público, Empleado en el sector privado, Autoempleado'),
+('Estudiante'),
+('Estudiante'),
+('Empleado en el sector público, Estudiante');
+
+INSERT INTO EntidadNacimiento (Entidad) VALUES
+('Ciudad de México CDMX'),
+('Ciudad de México CDMX'),
+('Puebla Pue.'),
+('Ciudad de México CDMX'),
+('México Mex.'),
+('Ciudad de México CDMX'),
+('Veracruz de Ignacio de la Llave Ver.'),
+('Guerrero (Gro)'),
+('Estado de México (Mex)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)'),
+('Antioquia - Colombia'),
+('Extranjero'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Michoacán de Ocampo (Mich)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)'),
+('Oaxaca (Oax)'),
+('Estado de México (Mex)'),
+('Estado de México (Mex)'),
+('Estado de México (Mex)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Extranjero'),
+('Medellín'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)'),
+('Ciudad de México (CDMX)'),
+('Veracruz de Ignacio de la Llave (Ver)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Ciudad de México (CDMX)'),
+('Estado de México (Mex)');
+
+INSERT INTO AsignaturasCursadas (Asignatura) VALUES
+('Manejo de Datos'),
+('Manejo de Datos'),
+('Manejo de Datos'),
+('Manejo de Datos'),
+('Programación'),
+('Programación'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Computación para Física'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Manejo de Datos'),
+('Manejo de Datos'),
+('Computación para Física'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Computación para Física, Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Computación para Física, Programación, Manejo de Datos'),
+('Ninguna de las anteriores, Base de datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Programación'),
+('Base de datos'),
+('Programación, Manejo de Datos'),
+('Programación'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos, Base de Datos'),
+('Computación para Física, Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Computación para Física'),
+('Bases de Datos'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Computación para Física'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos'),
+('Programación, Manejo de Datos');
+
+INSERT INTO ModalidadEnsenanza (Modalidad) VALUES
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Presencial'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Presencial'),
+('Híbrida (presencial y virtual)'),
+('Presencial'),
+('Presencial'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Híbrida (presencial y virtual)'),
+('Presencial'),
+('Presencial'),
+('Híbrida (presencial y virtual)'),
+('Híbrida (presencial y virtual)'),
+('Híbrida (presencial y virtual)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Híbrida (presencial y virtual)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Híbrida (presencial y virtual)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Híbrida (presencial y virtual)'),
+('Híbrida (presencial y virtual)'),
+('Híbrida (presencial y virtual)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Presencial'),
+('Híbrida (presencial y virtual)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Presencial'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Presencial'),
+('Presencial'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Presencial'),
+('Híbrida (presencial y virtual)'),
+('Virtual en línea (hora de clase con el profesor)'),
+('Virtual asíncrono (video ilustrativo + actividad)'),
+('Presencial');
+
+INSERT INTO UsoGrabaciones (UsoConsulta) VALUES
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Algunos videos porque no era constante el internet a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase, Algunos videos porque no era constante el internet a la hora de la clase'),
+('Algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Nunca los consulté posteriormente'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos por alguna otra razón'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos por alguna otra razón'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos por alguna otra razón'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos por alguna otra razón'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase'),
+('Sí, de todas las grabaciones'),
+('Sí, de todas las grabaciones'),
+('Solo de algunos videos porque no pude conectarme a la hora de la clase');
+
+INSERT INTO PlataformasTrabajo (Plataforma) VALUES
+('Classroom'),
+('Classroom'),
+('Moodle'),
+('Classroom'),
+('Classroom'),
+('Classroom'),
+('Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom'),
+('Moodle, Google Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom'),
+('Google Classroom'),
+('Moodle, Google Classroom');
+
+INSERT INTO EficaciaAlumno (NivelEficacia) VALUES
+(4),
+(5),
+(4),
+(5),
+(4),
+(4),
+(3),
+(5),
+(1),
+(4),
+(4),
+(4),
+(5),
+(4),
+(3),
+(3),
+(4),
+(5),
+(4),
+(4),
+(4),
+(3),
+(4),
+(3),
+(5),
+(5),
+(5),
+(4),
+(4),
+(1),
+(3),
+(3),
+(4),
+(5),
+(3),
+(4),
+(3),
+(4),
+(4),
+(5),
+(4),
+(4),
+(5),
+(2),
+(4),
+(4);
+
+
+UPDATE EficaciaAlumno
+SET ComunicacionProfesores = 5 WHERE ID IN (1, 2, 3, 4, 8, 11, 12, 13, 14, 18, 19, 20, 21, 22, 25, 26, 27, 28, 29, 31, 33, 35, 36, 37, 38, 39, 40, 42, 44, 45, 46, 47, 48);
+UPDATE EficaciaAlumno
+SET ComunicacionProfesores = 4 WHERE ID IN (6, 7, 15, 23, 30, 32, 41, 43);
+UPDATE EficaciaAlumno
+SET ComunicacionProfesores = 3 WHERE ID IN (16, 24, 34);
+UPDATE EficaciaAlumno
+SET ComunicacionProfesores = 2 WHERE ID IN (5, 16);
+UPDATE EficaciaAlumno
+SET ComunicacionProfesores = 1 WHERE ID IN (9);
+
+
+UPDATE EficaciaAlumno
+SET AumentoInteresContenido = 5 WHERE ID IN (2, 4, 6, 8, 11, 12, 13, 15, 17, 19, 20, 22, 24, 26, 28, 29, 31, 33, 35, 37, 38, 40, 42, 44, 45, 47, 49);
+UPDATE EficaciaAlumno
+SET AumentoInteresContenido = 4 WHERE ID IN (1, 3, 5, 7, 9, 10, 14, 16, 18, 21, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48);
+UPDATE EficaciaAlumno
+SET AumentoInteresContenido = 3 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET AumentoInteresContenido = 2 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET AumentoInteresContenido = 1 WHERE ID IN (9);
+
+
+UPDATE EficaciaAlumno
+SET MejoraMemoria = 5, MejoraAtencion = 4 WHERE ID IN (2, 4, 6, 8, 11, 12, 13, 15, 17, 19, 20, 22, 24, 26, 28, 29, 31, 33, 35, 37, 38, 40, 42, 44, 45, 47, 49);
+UPDATE EficaciaAlumno
+SET MejoraMemoria = 4, MejoraAtencion = 3 WHERE ID IN (1, 3, 5, 7, 9, 10, 14, 16, 18, 21, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48);
+UPDATE EficaciaAlumno
+SET MejoraMemoria = 3, MejoraAtencion = 2 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET MejoraMemoria = 2, MejoraAtencion = 3 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET MejoraMemoria = 1, MejoraAtencion = 4 WHERE ID IN (9);
+
+
+UPDATE EficaciaAlumno
+SET PersonalizacionAprendizaje = 5 WHERE ID IN (2, 4, 8, 11, 12, 13, 15, 19, 20, 22, 24, 26, 28, 29, 31, 33, 35, 37, 38, 40, 42, 44, 45, 47, 49);
+UPDATE EficaciaAlumno
+SET PersonalizacionAprendizaje = 4 WHERE ID IN (1, 3, 5, 7, 10, 14, 16, 18, 21, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48);
+UPDATE EficaciaAlumno
+SET PersonalizacionAprendizaje = 3 WHERE ID IN (6, 50);
+UPDATE EficaciaAlumno
+SET PersonalizacionAprendizaje = 2 WHERE ID IN (2, 50);
+UPDATE EficaciaAlumno
+SET PersonalizacionAprendizaje = 1 WHERE ID IN (9);
+
+
+UPDATE EficaciaAlumno
+SET InversionCapacitacion = 5 WHERE ID IN (3, 4, 5, 6, 13, 14, 18, 19, 22, 23, 25, 26, 27, 29, 31, 32, 35, 36, 38, 39, 41, 42, 44, 45, 46, 47, 48);
+UPDATE EficaciaAlumno
+SET InversionCapacitacion = 4 WHERE ID IN (1, 12, 15, 17, 20, 24, 28, 30, 33, 37, 40);
+UPDATE EficaciaAlumno
+SET InversionCapacitacion = 3 WHERE ID IN (2, 7, 8, 10, 16, 34);
+UPDATE EficaciaAlumno
+SET InversionCapacitacion = 2 WHERE ID IN (9, 21, 43);
+UPDATE EficaciaAlumno
+SET InversionCapacitacion = 1 WHERE ID IN (11);
+
+
+UPDATE EficaciaAlumno
+SET MejoraRetroalimentacion = 5 WHERE ID IN (2, 4, 5, 8, 11, 12, 13, 15, 19, 20, 22, 24, 26, 28, 29, 31, 33, 35, 37, 38, 40, 42, 44, 45, 47, 49);
+UPDATE EficaciaAlumno
+SET MejoraRetroalimentacion = 4 WHERE ID IN (1, 3, 7, 10, 14, 16, 18, 21, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48);
+UPDATE EficaciaAlumno
+SET MejoraRetroalimentacion = 3 WHERE ID IN (6, 9, 50);
+UPDATE EficaciaAlumno
+SET MejoraRetroalimentacion = 2 WHERE ID IN (2);
+UPDATE EficaciaAlumno
+SET MejoraRetroalimentacion = 1 WHERE ID IN (15);
+
+
+UPDATE EficaciaAlumno
+SET SimplificacionTareasAdmin = 5 WHERE ID IN (1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49);
+UPDATE EficaciaAlumno
+SET SimplificacionTareasAdmin = 4 WHERE ID IN (9, 10, 30);
+UPDATE EficaciaAlumno
+SET SimplificacionTareasAdmin = 3 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET SimplificacionTareasAdmin = 2 WHERE ID IN (15);
+UPDATE EficaciaAlumno
+SET SimplificacionTareasAdmin = 1 WHERE ID IN (33);
+
+
+UPDATE EficaciaAlumno
+SET FlexibilidadPlaneacion = 5 WHERE ID IN (1, 2, 3, 6, 7, 10, 11, 12, 13, 15, 16, 17, 19, 21, 23, 24, 25, 26, 27, 29, 30, 31, 32, 34, 35, 36, 37, 38, 40, 41, 42, 43, 44, 46, 47, 48);
+UPDATE EficaciaAlumno
+SET FlexibilidadPlaneacion = 4 WHERE ID IN (4, 5, 14, 18, 20, 22, 28, 33, 39, 45);
+UPDATE EficaciaAlumno
+SET FlexibilidadPlaneacion = 3 WHERE ID IN (8, 9, 49);
+UPDATE EficaciaAlumno
+SET FlexibilidadPlaneacion = 2 WHERE ID IN (50);
+UPDATE EficaciaAlumno
+SET FlexibilidadPlaneacion = 1 WHERE ID IN (30);
+
+
+UPDATE EficaciaAlumno
+SET MejoraParticipacionAlumnos = 5 WHERE ID IN (11, 12, 20, 24, 28, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 47);
+UPDATE EficaciaAlumno
+SET MejoraParticipacionAlumnos = 4 WHERE ID IN (4, 16, 17, 22, 26, 29, 31, 33, 39, 45);
+UPDATE EficaciaAlumno
+SET MejoraParticipacionAlumnos = 3 WHERE ID IN (1, 2, 3, 5, 6, 7, 8, 9, 10, 14, 15, 18, 21, 23, 25, 27, 30, 42, 48, 49);
+UPDATE EficaciaAlumno
+SET MejoraParticipacionAlumnos = 2 WHERE ID IN (19, 36);
+UPDATE EficaciaAlumno
+SET MejoraParticipacionAlumnos = 1 WHERE ID IN (13);
+
+
+UPDATE EficaciaAlumno
+SET MejoraAutoevaluacion = 5 WHERE ID IN (2, 8, 12, 16, 20, 24, 28, 32, 34, 37, 40, 43, 46);
+UPDATE EficaciaAlumno
+SET MejoraAutoevaluacion = 4 WHERE ID IN (3, 4, 5, 11, 14, 17, 18, 22, 26, 29, 31, 33, 38, 39, 41, 45);
+UPDATE EficaciaAlumno
+SET MejoraAutoevaluacion = 3 WHERE ID IN (1, 6, 7, 9, 10, 15, 23, 25, 27, 30, 35, 42, 48, 49);
+UPDATE EficaciaAlumno
+SET MejoraAutoevaluacion = 2 WHERE ID IN (13, 19, 21, 36);
+UPDATE EficaciaAlumno
+SET MejoraAutoevaluacion = 1 WHERE ID IN (44);
+
+
+UPDATE EficaciaAlumno
+SET NivelEsfuerzo = 'Excelente' WHERE ID IN (11, 13, 20, 24, 28, 32, 34, 35, 37, 38, 40, 41, 43, 44, 46, 49);
+UPDATE EficaciaAlumno
+SET NivelEsfuerzo = 'Muy bueno' WHERE ID IN (5, 8, 12, 16, 18, 22, 26, 29, 31, 33, 39, 45);
+UPDATE EficaciaAlumno
+SET NivelEsfuerzo = 'Satisfactorio' WHERE ID IN (1, 2, 3, 4, 6, 7, 9, 10, 14, 15, 17, 23, 25, 27, 30, 42, 48);
+UPDATE EficaciaAlumno
+SET NivelEsfuerzo = 'Medio' WHERE ID IN (1, 19, 36);
+
+
+UPDATE EficaciaProfesor
+SET NivelEsfuerzo = 'Excelente' WHERE ID IN (11, 23);
+UPDATE EficaciaProfesor
+SET NivelEsfuerzo = 'Muy bueno' WHERE ID IN (2, 3, 6, 7, 9, 10, 13, 18, 20, 21, 22, 25, 26, 27, 28, 30, 32, 33, 35, 36, 38, 41);
+UPDATE EficaciaProfesor
+SET NivelEsfuerzo = 'Satisfactorio' WHERE ID IN (4, 8, 14, 15, 16, 19, 24, 29, 31, 34, 37, 39, 40, 42, 43);
+UPDATE EficaciaProfesor
+SET NivelEsfuerzo = 'Medio' WHERE ID IN (1, 5, 12, 17);
+
+
+UPDATE EficaciaProfesor
+SET ConocimientosIniciales = 'Excelente' WHERE ID IN (17, 28, 32, 39);
+UPDATE EficaciaProfesor
+SET ConocimientosIniciales = 'Muy bueno' WHERE ID IN (5, 9, 10, 23, 24, 25, 27, 31, 35, 38, 40, 41, 43);
+UPDATE EficaciaProfesor
+SET ConocimientosIniciales = 'Satisfactorio' WHERE ID IN (16, 18, 26, 29, 30, 33, 34, 36, 37, 42);
+UPDATE EficaciaProfesor
+SET ConocimientosIniciales = 'Medio' WHERE ID IN (1, 2, 4, 6, 7, 8, 11, 12, 13, 14, 15, 19, 20, 21, 22);
+UPDATE EficaciaProfesor
+SET ConocimientosIniciales = 'Deficiente' WHERE ID IN (3);
+
+
+UPDATE EficaciaProfesor
+SET ConocimientosNecesarios = 'Excelente' WHERE ID IN (2, 9, 10, 12, 13, 15, 20, 23, 24, 27, 28, 29, 32, 34, 36, 39, 41, 43);
+UPDATE EficaciaProfesor
+SET ConocimientosNecesarios = 'Muy bueno' WHERE ID IN (4, 5, 6, 8, 11, 14, 16, 17, 18, 19, 21, 22, 25, 30, 31, 33, 37, 38, 40, 42);
+UPDATE EficaciaProfesor
+SET ConocimientosNecesarios = 'Satisfactorio' WHERE ID IN (3, 7, 26, 35);
+UPDATE EficaciaProfesor
+SET ConocimientosNecesarios = 'Medio' WHERE ID IN (1);
+UPDATE EficaciaProfesor
+SET ConocimientosNecesarios = 'Deficiente' WHERE ID IN (28);
+
+
+UPDATE EficaciaProfesor
+SET ContribucionCurso = 'Excelente' WHERE ID IN (10, 11, 22, 23, 27, 28, 29, 30, 31, 35, 37, 39, 42, 43);
+UPDATE EficaciaProfesor
+SET ContribucionCurso = 'Muy bueno' WHERE ID IN (2, 4, 5, 6, 8, 14, 16, 17, 18, 19, 21, 25, 32, 33, 36, 38, 40, 41);
+UPDATE EficaciaProfesor
+SET ContribucionCurso = 'Satisfactorio' WHERE ID IN (1, 3, 7, 9, 12, 13, 15, 20, 24, 26, 34);
+UPDATE EficaciaProfesor
+SET ContribucionCurso = 'Medio' WHERE ID IN (44);
+UPDATE EficaciaProfesor
+SET ContribucionCurso = 'Deficiente' WHERE ID IN (14);
+
+
+UPDATE EficaciaProfesor
+SET UsadoGoogleColab = 'Si'
+WHERE ID IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44);
+
+UPDATE EficaciaProfesor
+SET UsadoGoogleColab = 'No'
+WHERE ID = 45;
+
+UPDATE ConocimientosTecnologicos
+SET UsoGoogleColab = 'Regularmente' WHERE ID IN (1, 2, 3, 4, 7, 8, 9, 10, 12, 13, 14, 15, 17, 19, 20, 21, 24, 26, 27, 28, 29, 31, 32, 34, 35, 36, 37, 38, 40, 41, 42, 44, 45);
+
+UPDATE ConocimientosTecnologicos
+SET UsoGoogleColab = 'Ocasionalmente' WHERE ID IN (5, 6, 11, 18, 22, 23, 25, 30, 33, 39, 43);
+
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadUsoPythonColab = 'Muy fácil sin instalación previa' WHERE ID IN (1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45);
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadUsoPythonColab = 'Ocasionalmente con dificultades' WHERE ID IN (5, 29);
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadUsoPythonColab = 'Prefiere instalar y configurar Python en la computadora' WHERE ID IN (46, 47);
+
+UPDATE ConocimientosTecnologicos
+SET UsoGoogleDrive = 'Uso regular para almacenar y compartir proyectos' WHERE ID IN (1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47);
+
+UPDATE ConocimientosTecnologicos
+SET UsoGoogleDrive = 'Útil, pero limitado por el almacenamiento en el correo institucional' WHERE ID = 2;
+
+UPDATE ConocimientosTecnologicos
+SET UsoGoogleDrive = 'Uso regular para almacenar y compartir proyectos' WHERE ID IN (48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97);
+
+UPDATE ConocimientosTecnologicos
+SET PreferenciaClasesColab = 'Prefiero clases en línea con Google Colab' WHERE ID IN (1, 2, 3, 4, 6, 7, 9, 10, 12, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28);
+
+UPDATE ConocimientosTecnologicos
+SET PreferenciaClasesColab = 'Prefiero clases presenciales con Google Colab' WHERE ID IN (5, 8, 11, 16, 20, 24);
+
+UPDATE ConocimientosTecnologicos
+SET PreferenciaClasesColab = 'No tengo preferencia entre clases presenciales y en línea' WHERE ID IN (29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97);
+
+UPDATE ConocimientosTecnologicos
+SET BeneficioGrabacionesClase = 'Muy útiles, las he utilizado para repasar' WHERE ID IN (1, 2, 3, 4, 6, 7, 9, 10, 12, 13, 14, 15, 17, 18, 19, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97);
+
+UPDATE ConocimientosTecnologicos
+SET BeneficioGrabacionesClase = 'Ocasionalmente utilizadas, pero no las considero esenciales' WHERE ID IN (5, 8, 11, 16, 20, 24);
+
+UPDATE ConocimientosTecnologicos
+SET InteractividadClases = 'No tengo preferencia en términos de interactividad' WHERE ID IN (1, 10, 29, 31, 34, 36, 48, 54, 56, 58, 60, 62, 64, 67, 69, 72, 73, 74, 75, 77, 79, 80, 81, 82, 84, 87, 88, 91, 92, 93, 96);
+
+UPDATE ConocimientosTecnologicos
+SET InteractividadClases = 'Las clases presenciales son más interactivas que las en línea' WHERE ID IN (2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 20, 24, 28, 30, 33, 35, 38, 40, 41, 43, 45, 46, 47, 49, 50, 51, 52, 53, 55, 57, 59, 61, 65, 66, 68, 70, 71, 76, 78, 83, 85, 86, 90, 94, 95, 97);
+
+UPDATE ConocimientosTecnologicos
+SET InteractividadClases = 'Las clases en línea son igual de interactivas que las presenciales' WHERE ID IN (11, 16, 18, 19, 21, 22, 23, 25, 26, 27, 32, 37, 39, 42, 44, 63, 89);
+
+UPDATE ConocimientosTecnologicos
+SET InteractividadClases = 'La mezcla de ambos es algo bueno, las clases en línea para explicar los temas, y que queden grabadas, mientras las presenciales se enfoquen a resolver dudas de forma personal' WHERE ID IN (86);
+
+UPDATE ConocimientosTecnologicos
+SET FormatoClasesEnLinea = 'Prefiero las clases en línea en vivo a través de Zoom u otra plataforma similar.' WHERE ID IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 20, 24, 28, 30, 33, 35, 38, 40, 41, 43, 45, 46, 47, 49, 50, 51, 52, 53, 55, 57, 59, 61, 65, 66, 68, 70, 71, 76, 78, 83, 85, 86, 90, 94, 95, 97);
+
+UPDATE ConocimientosTecnologicos
+SET FormatoClasesEnLinea = 'Prefiero las clases en línea a través de grabaciones de clase sin la presencia de alumnos.' WHERE ID IN (11, 16, 18, 19, 21, 22, 23, 25, 26, 27, 32, 37, 39, 42, 44, 63, 89);
+
+UPDATE ConocimientosTecnologicos
+SET FormatoClasesEnLinea = 'Prefiero las clases presenciales grabadas.' WHERE ID IN (86);
+
+
+UPDATE ConocimientosTecnologicos
+SET DistraccionesDuranteClase = 'Otras actividades en mi entorno son distracciones (por ejemplo, ruido externo al salón).' WHERE ID IN (1, 7, 8, 12, 18, 19, 22, 23, 26, 27, 29, 30, 33, 34, 37, 38, 41, 44, 46, 47, 48, 53, 55, 58, 59, 60, 63, 64, 65, 66, 70, 71, 75, 78, 79, 81, 82, 83, 85, 86, 88, 90, 92, 93, 94, 95, 96, 97);
+
+UPDATE ConocimientosTecnologicos
+SET DistraccionesDuranteClase = 'Las notificaciones de redes sociales y mensajes son distracciones frecuentes.' WHERE ID IN (2, 3, 4, 5, 6, 13, 14, 15, 20, 24, 28, 31, 32, 35, 40, 42, 45, 49, 50, 51, 52, 54, 56, 57, 61, 62, 67, 68, 69, 72, 73, 76, 80, 84, 87, 91);
+
+UPDATE ConocimientosTecnologicos
+SET DistraccionesDuranteClase = 'No tengo distracciones durante la hora de clase.' WHERE ID IN (9, 10, 11, 16, 21, 25, 36, 39, 43, 74, 77, 89);
+
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'No tengo distracciones durante la hora de clase.' WHERE ID IN (1, 2);
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'Las notificaciones de redes sociales y mensajes son distracciones frecuentes.' WHERE ID IN (3, 4, 5, 6);
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'Otras actividades en mi entorno son distracciones (por ejemplo, ruido).' WHERE ID IN (7);
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'Tiendo a realizar otras actividades al mismo tiempo que la clase.' WHERE ID IN (8, 10, 12, 13, 15, 16, 19, 21, 23, 24, 26, 28, 29, 31, 32, 35, 37, 38, 39, 40, 43, 46, 47, 49, 50, 51, 53, 54, 56, 58, 59, 60, 62, 63, 64, 65, 67, 69, 71, 72, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 86, 87, 89, 91, 93, 95, 96, 97);
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'Tiendo a ignorar las notificaciones de redes sociales y mensajes.' WHERE ID IN (9, 11, 14, 17, 18, 20, 22, 25, 27, 30, 33, 34, 36, 41, 42, 44, 45, 48, 52, 55, 57, 61, 66, 68, 70, 73, 85, 88, 90, 92, 94);
+
+UPDATE ConocimientosTecnologicos
+SET ConcentracionDuranteClase = 'Me concentro mucho durante la hora de clase.' WHERE ID IN (98, 99, 100);
+
+
+UPDATE ConocimientosTecnologicos
+SET OtrasMateriasHoraClase = 'No tengo otras materias a la hora de clase.' WHERE ID IN (1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100);
+
+UPDATE ConocimientosTecnologicos
+SET OtrasMateriasHoraClase = 'Tengo otras materias a la hora de clase y a veces debo alternar entre ellas.' WHERE ID IN (3, 62);
+
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadAprendizajePython = 'Encuentro que Python es fácil de aprender.' WHERE ID IN (2, 6, 12, 13, 16, 22, 23, 28, 29, 32, 33, 37, 39, 41, 43, 45, 46, 47, 49, 51, 52, 53, 57, 58, 59, 61, 63, 64, 65, 67, 68, 72, 74, 77, 79, 80, 81, 82, 85, 87, 88, 90, 91, 93, 94, 95, 96, 99);
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadAprendizajePython = 'A veces tengo dificultades para aprender Python.' WHERE ID IN (1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20, 21, 24, 25, 26, 27, 30, 31, 34, 35, 36, 38, 40, 42, 44, 48, 50, 54, 55, 56, 60, 62, 66, 69, 70, 71, 73, 75, 76, 78, 83, 84, 86, 89, 92, 97, 98, 100);
+
+UPDATE ConocimientosTecnologicos
+SET FacilidadAprendizajePython = 'Encuentro que Python es difícil de aprender.' WHERE ID IN (91);
+
+
+UPDATE ConocimientosTecnologicos
+SET DificultadTemas = 'Algunas temáticas son fáciles, otras son difíciles.' WHERE ID IN (1, 3, 4, 5, 7, 8, 9, 10, 11, 14, 15, 17, 18, 19, 20, 21, 24, 25, 26, 27, 30, 31, 34, 35, 36, 38, 40, 42, 44, 48, 50, 54, 55, 56, 60, 62, 66, 69, 70, 71, 73, 75, 76, 78, 83, 84, 86, 89, 92, 97, 98, 100);
+
+UPDATE ConocimientosTecnologicos
+SET DificultadTemas = 'La mayoría de las temáticas son fáciles de entender.' WHERE ID IN (2, 6, 12, 13, 16, 22, 23, 28, 29, 32, 33, 37, 39, 41, 43, 45, 46, 47, 49, 51, 52, 53, 57, 58, 59, 61, 63, 64, 65, 67, 68, 72, 74, 77, 79, 80, 81, 82, 85, 87, 88, 90, 91, 93, 94, 95, 96, 99);
+
+UPDATE ConocimientosTecnologicos
+SET DificultadTemas = 'La mayoría de las temáticas son difíciles de entender.' WHERE ID IN (91);
+
+
+UPDATE ConocimientosTecnologicos
+SET ComprensionPOO = 'Tengo una comprensión básica de la programación orientada a objetos.' WHERE ID IN (1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 36, 38, 39, 41, 42, 43, 44, 46, 48, 49, 51, 52, 53, 54, 56, 57, 58, 59, 60, 61, 62, 64, 65, 66, 67, 69, 70, 71, 73, 75, 76, 77, 78, 80, 82, 83, 84, 85, 87, 88, 89, 91, 92, 94, 95, 96, 97, 98, 100);
+
+UPDATE ConocimientosTecnologicos
+SET ComprensionPOO = 'Entiendo completamente la programación orientada a objetos.' WHERE ID IN (2, 3, 20, 22, 24, 35, 37, 40, 45, 47, 50, 55, 63, 68, 72, 74, 79, 81, 86, 90, 93, 99);
+
+UPDATE ConocimientosTecnologicos
+SET ComprensionPOO = 'No entiendo la programación orientada a objetos.' WHERE ID IN (52);
+
+
+UPDATE ConocimientosTecnologicos
+SET UsoIA = 'He utilizado inteligencia artificial en mis proyectos de programación.' WHERE ID IN (1, 3, 4, 8, 9, 13, 14, 17, 18, 19, 20, 21, 25, 26, 30, 31, 32, 34, 36, 39, 41, 45, 48, 51, 53, 56, 57, 58, 60, 61, 62, 63, 64, 66, 67, 68, 69, 70, 72, 73, 75, 76, 79, 80, 83, 84, 87, 88, 91, 93, 94, 97, 98);
+
+UPDATE ConocimientosTecnologicos
+SET UsoIA = 'He explorado la inteligencia artificial, pero no la he aplicado en proyectos.' WHERE ID IN (2, 5, 6, 7, 10, 11, 12, 15, 16, 22, 23, 24, 27, 28, 29, 33, 35, 37, 40, 42, 43, 44, 46, 49, 50, 52, 54, 55, 59, 65, 71, 74, 77, 78, 81, 82, 85, 86, 89, 90, 92, 95, 96, 99, 100);
+
+UPDATE ConocimientosTecnologicos
+SET UsoIA = 'No he utilizado inteligencia artificial en mis proyectos.' WHERE ID IN (38, 47, 97);
+
+
+UPDATE ConocimientosTecnologicos
+SET TecnicasAprendizaje = 'Utilizo técnicas de aprendizaje activas, como resúmenes y ejercicios prácticos.' WHERE ID IN (1, 3, 4, 8, 9, 13, 14, 17, 18, 19, 20, 21, 25, 26, 30, 31, 32, 34, 36, 39, 41, 45, 48, 51, 53, 56, 57, 58, 60, 61, 62, 63, 64, 66, 67, 68, 69, 70, 72, 73, 75, 76, 79, 80, 83, 84, 87, 88, 91, 93, 94, 97, 98);
+
+UPDATE ConocimientosTecnologicos
+SET TecnicasAprendizaje = 'Sigo principalmente el material proporcionado en clase.' WHERE ID IN (2, 5, 6, 7, 10, 11, 12, 15, 16, 22, 23, 24, 27, 28, 29, 33, 35, 37, 40, 42, 43, 44, 46, 49, 50, 52, 54, 55, 59, 65, 71, 74, 77, 78, 81, 82, 85, 86, 89, 90, 92, 95, 96, 99, 100);
+
+UPDATE ConocimientosTecnologicos
+SET TecnicasAprendizaje = 'No tengo una estrategia específica de aprendizaje.' WHERE ID IN (38, 47, 97);
+
+
+UPDATE ConocimientosTecnologicos
+SET AyudaIAAprendizaje = 'He utilizado chatbots o asistentes virtuales como ChatGPT para obtener ayuda en el aprendizaje.' WHERE ID IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50);
+
+UPDATE ConocimientosTecnologicos
+SET AyudaIAAprendizaje = 'No he utilizado herramientas de IA para el aprendizaje.' WHERE ID IN (51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100);
+
+UPDATE ConocimientosTecnologicos
+SET AyudaIAAprendizaje = 'No estoy seguro de si he utilizado herramientas de IA para el aprendizaje.' WHERE ID IN (26, 61, 63, 99);
+
+
+UPDATE ConocimientosTecnologicos
+SET UsoSQLiteColab = 'Sí, he utilizado SQLite en Google Colab y lo encontré fácil de usar.' WHERE ID IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50);
+
+UPDATE ConocimientosTecnologicos
+SET UsoSQLiteColab = 'Sí, he utilizado SQLite en Google Colab, pero lo encontré más complicado que instalarlo.' WHERE ID IN (51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100);
+
+UPDATE ConocimientosTecnologicos
+SET UsoSQLiteColab = 'No he utilizado SQLite en Google Colab.' WHERE ID IN (26, 61, 63, 99);
+
+UPDATE ConocimientosTecnologicos
+SET UsoSQLiteColab = 'No estoy familiarizado con SQLite.' WHERE ID IN (26, 61, 63, 99);
+
+
+''')
+
+cursor.execute('select * from intervaloedad;')
+cursor.execute('select NivelEficacia from eficaciaalumno;')
+cursor.execute('select * from eficaciaalumno;')
+cursor.execute('select * from sexonacimiento;')
+cursor.execute('select marcatemporal from registromarcas;')
+cursor.execute('select modalidad from modalidadensenanza;')
+cursor.execute('select plataforma from plataformastrabajo;')
+cursor.execute('select usoconsulta from usograbaciones;')
+cursor.execute('select * from consentimientos;')
+cursor.execute('select * from arealaboral;')
+
+
+
+# Commit the changes and close the connection
+conn.commit()
+conn.close()
